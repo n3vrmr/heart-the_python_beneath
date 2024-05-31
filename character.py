@@ -7,6 +7,8 @@ Created on Sat May 25 19:11:27 2024
 
 import dice as d
 import time as t
+import pandas as pd
+from fallout import *
 from ancestry import Ancestry
 
 class Character:
@@ -19,18 +21,26 @@ class Character:
                             "supplies":0}
         self.protection = {"blood":0,"mind":0,"echo":0,"fortune":0,
                            "supplies":0}
+        self.character_fallout = pd.DataFrame({"level":[],
+                                               "kind":[],
+                                               "name":[],
+                                               "description":[],
+                                               "duration":[]})
+        return
+    
+    def add_fallout(self, name:str):
         return
     
     def apply_fallout(self, kind:str):        
         stress_check = d.roll(1, 12)
         if stress_check < 6:
-            fallout_type = "minor"
+            fallout_level = "minor"
         else:
-            fallout_type = "major"
+            fallout_level = "major"
         
         if stress_check <= self.resistances.get(kind):
             self.resistances[f"{kind}"] = 0
-            print(f"{self._name} has taken {fallout_type} fallout to {kind}.")
+            print(f"{self._name} has taken {fallout_level} fallout to {kind}.")
             
             
         else:
