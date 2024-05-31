@@ -10,7 +10,7 @@ import dice as d
 import time as t
 
 def action(difficulty:str, skill:int=0, domain:int=0, mastery:int=0,
-                assists:int=0):
+           assists:int=0):
     """
     Function to be used when a character takes an action that requires a roll,
     as defined by the GM and the player. There must be something at stake for
