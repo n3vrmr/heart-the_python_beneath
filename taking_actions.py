@@ -25,7 +25,7 @@ def action(difficulty:str, skill:int=0, domain:int=0, mastery:int=0,
     Parameters
     ----------
     difficulty : str
-        Possible values for this argument are: 'standard', 'risky', and
+        Acceptable values for this argument are: 'standard', 'risky', and
         'dangerous', as defined by the core rulebook. Impossible actions are
         not included in this function.
     skill : int, optional
@@ -68,6 +68,8 @@ def action(difficulty:str, skill:int=0, domain:int=0, mastery:int=0,
     success_msg_2 = "\033[1;32;40mSuccess. Take no stress.\033[0m"
     success_msg_3 = "\033[1;32;40mCritical success. Increase outgoing stress dice by 1 step.\033[0m"
     
+    error_msg = "Difficulty not recognized. Use help on this function to check for acceptable values."
+    
     relevant_to_roll = [skill, domain, mastery, assists]
     a = sum(relevant_to_roll)
     dice_pool = a + 1
@@ -78,6 +80,8 @@ def action(difficulty:str, skill:int=0, domain:int=0, mastery:int=0,
         amount_to_remove = 1
     elif difficulty == "dangerous":
         amount_to_remove = 2
+    else:
+        raise ValueError(error_msg)
     
     final_pool = dice_pool - amount_to_remove
     

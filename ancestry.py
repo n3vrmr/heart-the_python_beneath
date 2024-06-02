@@ -9,33 +9,81 @@ Created on Sat May 25 16:36:55 2024
 import time as t
 import random as rd
 
-class Ancestry:
+class Ancestry:    
     def __init__(self):
+        """
+        Used to define a character's ancestry and save information specific to
+        the Ancestry class chosen by the player.
+
+        Returns
+        -------
+        None.
+
+        """
         self.ancestry = self.choosing()
         self.origin = self.origins()
         self.trinkets = self.trinkets()
         return
 
     def choosing():
+        """
+        Allows the player to choose one of the four ancestries of Heart. Choose
+        one of the following:
+            Drow
+            Aelfir
+            Human
+            Gnoll
+
+        Returns
+        -------
+        ancestry : string object in lowercase letters of the character's
+        ancestry.
+
+        """
         ancestry = input("Choose your character's ancestry: ").lower().strip()
         return ancestry
     
     def origins(self):
+        """
+        Uses the character's ancestry to select the specific function to help
+        with character creation. Saves the class object of the selected
+        ancestry as a protected attribute.
+
+        Returns
+        -------
+        o : placeholder dict object. Check the methods of each ancestry class
+        for details.
+
+        """
+        ancestry_error_msg = "Ancestry not recognized. Choose between drow, aelfir, human or gnoll."
+        
         if self._ancestry == "drow":
-            self.a = Drow
+            self._a = Drow
             o = Drow.drow_details(self)
         elif self._ancestry == "human":
-            self.a = Human
+            self._a = Human
             o = Human.human_details(self)
         elif self._ancestry == "aelfir":
-            self.a = Aelfir
+            self._a = Aelfir
             o = Aelfir.aelfir_details(self)
         elif self._ancestry == "gnoll":
-            self.a = Gnoll
+            self._a = Gnoll
             o = Gnoll.gnoll_details(self)
+        else:
+            raise ValueError(ancestry_error_msg)
         return o
     
     def trinkets(self):
+        """
+        Uses the character's ancestry to select the specific function to help
+        with character creation.
+
+        Returns
+        -------
+        t : placeholder list object. Check the methods of each ancestry class
+        for details.
+
+        """
         if self._ancestry == "drow":
             t = Drow.drow_trinkets(self)
         elif self._ancestry == "human":
@@ -48,6 +96,15 @@ class Ancestry:
 
 class Drow:
     def drow_details(self):
+        """
+        Function to help with Drow character creation.
+
+        Returns
+        -------
+        self._origin : protected dict object containing information about the
+        character's background.
+
+        """
         char_creation = "Answer one of the following questions:"
         q1 = "1. You were born in the City Above and served a durance - 4 years of indentured servitude - to a cruel aelfir. What were you forced to do?"
         q2 = "2. You were born in the City Beneath. Where does your family live, and who or what do they worship?"
@@ -73,6 +130,15 @@ class Drow:
         return self._origin
     
     def drow_trinkets(self):
+        """
+        Function to help with Drow character creation.
+
+        Returns
+        -------
+        self._trinkets : protected list object containing information about the
+        character's trinkets and keepsakes.
+
+        """
         trinkets_list = ["Deck of Malrique fortune cards","Yeast mother",
                          "Half a bottle of malak tincture; all that remains of your stash",
                          "Dog-tags from the Allied Defense Forces",
@@ -110,6 +176,15 @@ class Drow:
     
 class Human:
     def human_details(self):
+        """
+        Function to help with Human character creation.
+
+        Returns
+        -------
+        self._origin : protected dict object containing information about the
+        character's background.
+
+        """
         char_creation = "Answer one of the following questions:"
         q1 = "1. You are from the Eastern Kingdoms. You came to Spire with nothing but the clothes on your back and a dream, looking for excitement and profit. What went wrong?"
         q2 = "2. You were kicked out of a retro-engineering or magical college thanks to your unorthodox beliefs and practices. What did you do?"
@@ -135,6 +210,15 @@ class Human:
         return self._origin
     
     def human_trinkets(self):
+        """
+        Function to help with Human character creation.
+
+        Returns
+        -------
+        self._trinkets : protected list object containing information about the
+        character's trinkets and keepsakes.
+
+        """
         trinkets_list = ["Grail charm made of wyvern-bone",
                          "Bullet with your own name carved on it",
                          "Broken pocket-watch with a picture of your mum in it",
@@ -172,6 +256,15 @@ class Human:
     
 class Aelfir:
     def aelfir_details(self):
+        """
+        Function to help with Aelfir character creation.
+
+        Returns
+        -------
+        self._origin : protected dict object containing information about the
+        character's background.
+
+        """
         char_creation = "Answer one of the following questions:"
         q1 = "1. You still wear your mask. What does it look like, and why do you wear it?"
         q2 = "2. Your family name was ruined by a cataclysmic social faux pas. What did they do?"
@@ -197,6 +290,15 @@ class Aelfir:
         return self._origin
     
     def aelfir_trinkets(self):
+        """
+        Function to help with Aelfir character creation.
+
+        Returns
+        -------
+        self._trinkets : protected list object containing information about the
+        character's trinkets and keepsakes.
+
+        """
         trinkets_list = ["Vial of orchid oil-perfume","Fingerbone necklace",
                          "Your brother's preserved eye in a glass jar",
                          "Oversized and awkward book of family history",
@@ -232,6 +334,15 @@ class Aelfir:
     
 class Gnoll:
     def gnoll_details(self):
+        """
+        Function to help with Gnoll character creation.
+
+        Returns
+        -------
+        self._origin : protected dict object containing information about the
+        character's background.
+
+        """
         char_creation = "Answer one of the following questions:"
         q1 = "1. You travelled to the Heart in search of something specific. Were you part of a team, or were you on your own - and did you find what you were looking for?"
         q2 = "2. You fled Spire - you were an escaped prisoner of war, a refugee or an agent on a clandestine mission. What do you miss the most about the surface world?"
@@ -257,6 +368,15 @@ class Gnoll:
         return self._origin
     
     def gnoll_trinkets(self):
+        """
+        Function to help with Gnoll character creation.
+
+        Returns
+        -------
+        self._trinkets : protected list object containing information about the
+        character's trinkets and keepsakes.
+
+        """
         trinkets_list = ["Tiny sealed box that gets angry when you shake it",
                          "Several cubes of refined sugar, wrapped in red paper",
                          "Annotated map of the war-torn Dust region",
